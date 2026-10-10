@@ -14,7 +14,7 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1  
 EOF  
 
-**Apply sysctl settings without rebooting**
+**Apply sysctl settings without rebooting**  
 sudo sysctl --system  
 
 # **Install Container Runtime - All Nodes**
