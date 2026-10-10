@@ -70,6 +70,9 @@ curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests
 
 **Open the custom-resources.yaml file in a text editor and locate the ipPools section. Crucial: Change the cidr block value (192.168.0.0/16 by default) to match the Pod Network CIDR you specified when initializing your cluster (e.g., if you used kubeadm init --pod-network-cidr=10.244.0.0/16, update the CIDR here to 10.244.0.0/16).**  
 
+vim custom-resources.yaml  
+Update CIDR to 10.244.0.0/16  
+esc :x  
 kubectl create -f custom-resources.yaml  
 
 kubectl get pods -n calico-system -w  
