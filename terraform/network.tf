@@ -1,4 +1,4 @@
-# 1. Create a VPC
+# Create a VPC
 resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
@@ -9,7 +9,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-# 2. Create a Private Subnet (No Internet Gateway)
+# Create a Private Subnet (No Internet Gateway)
 resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.1.0/24"
@@ -20,7 +20,7 @@ resource "aws_subnet" "private" {
   }
 }
 
-# 3. Create a Security Group
+# Create a Security Group
 resource "aws_security_group" "private_sg" {
   name        = "private-ubuntu-sg"
   description = "Allow internal traffic"
