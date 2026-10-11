@@ -20,6 +20,7 @@ sudo sysctl --system
 
 # **Install Container Runtime - All Nodes**
 sudo apt update  
+sudo apt upgrade  
 sudo apt install -y containerd  
 
 **Configure containerd to use systemd cgroup**  
