@@ -74,7 +74,7 @@ curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests
 nano custom-resources.yaml  
 Update CIDR to 10.244.0.0/16  
 Control+O Enter  
-Control+X. 
+Control+X  
 kubectl create -f custom-resources.yaml  
 
 kubectl get pods -n calico-system -w  
