@@ -66,7 +66,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/v1_crd_projectcalico_org.yaml  
 
 **Install the Tigera Operator**  
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/tigera-operator.yaml. 
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/tigera-operator.yaml  
 curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/custom-resources.yaml  
 
 **Open the custom-resources.yaml file in a text editor and locate the ipPools section. Crucial: Change the cidr block value (192.168.0.0/16 by default) to match the Pod Network CIDR you specified when initializing your cluster (e.g., if you used kubeadm init --pod-network-cidr=10.244.0.0/16, update the CIDR here to 10.244.0.0/16).**  
