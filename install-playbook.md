@@ -1,7 +1,8 @@
 # **System Preparation - All Nodes**
 **Disable swap immediately and permanently**  
 sudo swapoff -a  
-sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab  
+~~sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab~~  
+sudo sed -i -E '/ swap / s/^(.*)$/#\1/' /etc/fstab  
 
 **Load required kernel modules**  
 sudo modprobe overlay  
