@@ -59,7 +59,7 @@ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 # **Configure kubectl Access - Control Plane Only**
 mkdir -p $HOME/.kube  
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config  
-sudo chown $(id -u):$(id -g) $HOME/.kube/config  
+sudo chown \$(id -u):\$(id -g) $HOME/.kube/config  
 
 # **Deploy a Pod Network Plugin - Control Plane Only**
 **Install the Calico Custom Resource Definitions**  
