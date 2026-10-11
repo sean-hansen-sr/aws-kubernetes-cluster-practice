@@ -38,9 +38,8 @@ sudo apt install -y apt-transport-https ca-certificates curl gpg
 
 **Download the public signing key for the Kubernetes package repositories**  
 **Note: Adjust the version (v1.31, v1.32, etc.) depending on your target version**  
-K8S_VERSION=v1.37  
 sudo mkdir -p /etc/apt/keyrings  
-curl -fsSL https://k8s.io{K8S_VERSION}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg  
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg  
 
 **Add the repository to your system sources**  
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://k8s.io{K8S_VERSION}/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list  
