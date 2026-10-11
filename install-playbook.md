@@ -46,6 +46,7 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 
 **Install the components**  
 sudo apt update  
+sudo apt update && sudo apt install -y conntrack  
 sudo apt install -y kubelet kubeadm kubectl  
 
 **Pin the versions so apt upgrade doesn't break your cluster**  
