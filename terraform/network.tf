@@ -93,6 +93,13 @@ resource "aws_security_group" "private_sg" {
   description = "Allow internal traffic"
   vpc_id      = aws_vpc.main.id
 
+  ingress {
+    from_port   = 6443
+    to_port     = 6443
+    protocol    = "tcp"
+    self        = true
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
