@@ -57,6 +57,9 @@ resource "aws_instance" "ubuntu_vm" {
   vpc_security_group_ids = [aws_security_group.private_sg.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
 
+  # Assign Private IP Address
+  private_ip = var.kubernetes_private_ips[count.index]
+
   # Configure the root storage drive to 60 GB
   root_block_device {
     volume_size           = 60
