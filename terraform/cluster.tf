@@ -12,9 +12,9 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-# IAM Role for SSM
-resource "aws_iam_role" "ssm_role" {
-  name = "ubuntu-ssm-role"
+# IAM Role for EC2
+resource "aws_iam_role" "ec2_ssm_ecr_role" {
+  name = "ec2-ecr-ssm-reader-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -30,16 +30,22 @@ resource "aws_iam_role" "ssm_role" {
   })
 }
 
+# Attach the Managed Policy for ECR Read-Only access
+resource "aws_iam_role_policy_attachment" "ecr_readonly" {
+  role       = aws_iam_role.ec2_ssm_ecr_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 # Attach the AmazonSSMManagedInstanceCore policy
-resource "aws_iam_role_policy_attachment" "ssm_attach" {
-  role       = aws_iam_role.ssm_role.name
+resource "aws_iam_role_policy_attachment" "ssm_core" {
+  role       = aws_iam_role.ec2_ssm_ecr_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 # Create Instance Profile
-resource "aws_iam_instance_profile" "ssm_profile" {
-  name = "ubuntu-ssm-instance-profile"
-  role = aws_iam_role.ssm_role.name
+resource "aws_iam_instance_profile" "ec2_profile" {
+  name = "ec2-ecr-ssm-instance-profile"
+  role = aws_iam_role.ec2_ssm_ecr_role.name
 }
 
 # Deploy 3 Ubuntu VMs with No External IP
@@ -49,7 +55,7 @@ resource "aws_instance" "ubuntu_vm" {
   instance_type          = "t3.small"
   subnet_id              = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.private_sg.id]
-  iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
+  iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
 
   # Configure the root storage drive to 60 GB
   root_block_device {
