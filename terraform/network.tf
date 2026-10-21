@@ -93,10 +93,27 @@ resource "aws_security_group" "private_sg" {
   description = "Allow internal traffic"
   vpc_id      = aws_vpc.main.id
 
+  # Allow Kubernetes API server
   ingress {
     from_port   = 6443
     to_port     = 6443
     protocol    = "tcp"
+    self        = true
+  }
+
+  # Allow TCP Port 179 (BGP) traffic
+  ingress {
+    from_port   = 179
+    to_port     = 179
+    protocol    = "tcp"
+    self        = true
+  }
+
+  # Allow IP-in-IP (IP Protocol 4) encapsulation
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "4" # Protocol 4 represents IP-in-IP
     self        = true
   }
 
