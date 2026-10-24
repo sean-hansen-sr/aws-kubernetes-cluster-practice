@@ -18,8 +18,8 @@ resource "aws_instance" "ubuntu_vm" {
   # Set Latest Ubuntu 22.04 AMI
   # ami                    = data.aws_ami.ubuntu.id
   # Set Specific AMI Image 
-  ami                    = var.ubuntu_setting_values["ami"]
-  instance_type          = var.ubuntu_setting_values["instance_type"]
+  ami                    = var.ec2_setting_values["ami"]
+  instance_type          = var.ec2_setting_values["instance_type"]
   subnet_id              = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.private_sg.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
