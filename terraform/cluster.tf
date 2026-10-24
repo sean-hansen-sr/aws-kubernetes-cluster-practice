@@ -15,9 +15,9 @@ data "aws_ami" "ubuntu" {
 # Deploy 3 Ubuntu VMs with No External IP
 resource "aws_instance" "ubuntu_vm" {
   count                  = 3
-  # Sets Latest Ubuntu 22.04 AMI
+  # Set Latest Ubuntu 22.04 AMI
   # ami                    = data.aws_ami.ubuntu.id
-  # Statically set AMI 
+  # Set specific AMI Image 
   ami                    = var.ami_id
   instance_type          = "t3.small"
   subnet_id              = aws_subnet.private.id
